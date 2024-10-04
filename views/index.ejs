@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacts List</title>
+</head>
+<body>
+  <h1>Contacts</h1>
+
+  <!-- List Contacts -->
+  <ul>
+    <% contacts.forEach(contact => { %>
+      <li>
+        <%= contact.firstName %> <%= contact.lastName %> - <%= contact.email %>
+
+        <!-- Delete Form -->
+        <form action="/contacts/delete" method="POST" style="display:inline;">
+          <input type="hidden" name="id" value="<%= contact._id %>">
+          <button type="submit">Delete</button>
+        </form>
+      </li>
+    <% }); %>
+  </ul>
+
+  <!-- Create New Contact Form -->
+  <h2>Create a New Contact</h2>
+  <form action="/contacts" method="POST">
+    <input type="text" name="firstName" placeholder="First Name" required>
+    <input type="text" name="lastName" placeholder="Last Name" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <button type="submit">Create</button>
+  </form>
+
+  <!-- Update Contact Form -->
+  <h2>Update a Contact</h2>
+  <form action="/contacts/update" method="POST">
+    <!-- Field to identify the contact to update -->
+    <input type="text" name="searchFirstName" placeholder="Enter First Name to Identify Contact" required>
+
+    <!-- Fields to input updated contact info -->
+    <input type="text" name="firstName" placeholder="New First Name" required>
+    <input type="text" name="lastName" placeholder="New Last Name" required>
+    <input type="email" name="email" placeholder="New Email" required>
+
+    <button type="submit">Update</button>
+  </form>
+</body>
+</html>
